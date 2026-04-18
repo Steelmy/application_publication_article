@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inkwell — Le magazine d'idées</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-serif-display { font-family: 'Instrument Serif', serif; letter-spacing: -0.02em; }
+  </style>
+</head>
+<body class="bg-stone-50 text-zinc-900 antialiased">
+
+  <!-- ============== HEADER ============== -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-stone-50/80 border-b border-zinc-200/60">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center">
+          <span class="font-serif-display text-stone-50 text-xl leading-none">I</span>
+        </div>
+        <span class="font-serif-display text-2xl">Inkwell</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+        <a href="index.html" class="text-zinc-900">Accueil</a>
+        <a href="#" class="hover:text-zinc-900 transition">Catégories</a>
+        <a href="#" class="hover:text-zinc-900 transition">Favoris</a>
+        <a href="#" class="hover:text-zinc-900 transition">À propos</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button class="hidden sm:flex items-center gap-2 px-3 py-2 text-sm text-zinc-500 bg-white border border-zinc-200 rounded-lg hover:border-zinc-300 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <span>Rechercher…</span>
+          <kbd class="ml-2 px-1.5 py-0.5 text-xs bg-zinc-100 border border-zinc-200 rounded">⌘K</kbd>
+        </button>
+        <a href="login.html" class="text-sm font-medium text-zinc-700 hover:text-zinc-900">Connexion</a>
+        <a href="login.html" class="text-sm font-medium px-4 py-2 bg-zinc-900 text-stone-50 rounded-lg hover:bg-zinc-700 transition">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============== HERO ============== -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-12">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 bg-amber-100 border border-amber-200 rounded-full">
+          <span class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span>
+          <span class="text-xs font-medium text-amber-900">Nouvel article — Sciences cognitives</span>
+        </div>
+        <h1 class="font-serif-display text-5xl md:text-7xl leading-[0.95]">
+          Des idées qui <em class="italic text-amber-700">durent</em>,<br/>
+          des récits qui <em class="italic">comptent</em>.
+        </h1>
+        <p class="mt-6 text-lg text-zinc-600 max-w-xl">
+          Un magazine éditorial autour des sciences, de la littérature et de la culture contemporaine. Lisez, aimez, suivez vos catégories préférées.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 text-sm text-zinc-500">
+        <div class="flex -space-x-2">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-200 to-rose-300 border-2 border-stone-50"></div>
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-200 to-cyan-300 border-2 border-stone-50"></div>
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-violet-200 to-indigo-300 border-2 border-stone-50"></div>
+        </div>
+        <span>+ 12 000 lecteurs cette semaine</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CATÉGORIES (chips) ============== -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-10">
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+      <button class="shrink-0 px-4 py-2 text-sm font-medium bg-zinc-900 text-stone-50 rounded-full">Tout</button>
+      <button class="shrink-0 flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        Sciences <span class="text-xs text-zinc-400">24</span>
+      </button>
+      <button class="shrink-0 flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        Littérature <span class="text-xs text-zinc-400">18</span>
+      </button>
+      <button class="shrink-0 flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        Philosophie <span class="text-xs text-zinc-400">12</span>
+      </button>
+      <button class="shrink-0 flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        Histoire <span class="text-xs text-zinc-400">9</span>
+      </button>
+      <button class="shrink-0 flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        Société <span class="text-xs text-zinc-400">15</span>
+      </button>
+      <button class="shrink-0 flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        Technologie <span class="text-xs text-zinc-400">21</span>
+      </button>
+      <button class="shrink-0 flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        Arts <span class="text-xs text-zinc-400">7</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============== ARTICLE À LA UNE ============== -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
+    <article class="group relative grid lg:grid-cols-2 gap-8 items-stretch bg-white rounded-3xl overflow-hidden border border-zinc-200/70 hover:shadow-2xl hover:shadow-zinc-900/10 transition-all duration-500">
+      <div class="relative aspect-[4/3] lg:aspect-auto bg-gradient-to-br from-amber-300 via-rose-400 to-fuchsia-500">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4),transparent_50%)]"></div>
+        <span class="absolute top-6 left-6 px-3 py-1 text-xs font-semibold bg-white/90 backdrop-blur rounded-full">À LA UNE</span>
+      </div>
+      <div class="p-8 lg:p-12 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 text-sm text-zinc-500 mb-4">
+            <span class="font-medium text-amber-700">Sciences</span>
+            <span>·</span>
+            <span>8 min de lecture</span>
+          </div>
+          <h2 class="font-serif-display text-4xl md:text-5xl leading-tight mb-4 group-hover:text-amber-800 transition">
+            Le cerveau bayésien : pourquoi nous prédisons plus que nous ne percevons
+          </h2>
+          <p class="text-zinc-600 text-lg leading-relaxed">
+            La perception serait moins une caméra qu'un pari. Karl Friston et le principe d'énergie libre ont bouleversé notre compréhension de la conscience. Récit d'une révolution silencieuse en neurosciences.
+          </p>
+        </div>
+        <div class="mt-8 flex items-center justify-between pt-6 border-t border-zinc-100">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900"></div>
+            <div>
+              <p class="text-sm font-medium">Camille Aubert</p>
+              <p class="text-xs text-zinc-500">12 avril 2026</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 text-zinc-500">
+            <span class="flex items-center gap-1.5 text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              4.2k
+            </span>
+            <span class="flex items-center gap-1.5 text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              328
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============== GRID ARTICLES + SIDEBAR ============== -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+    <div class="grid lg:grid-cols-3 gap-10">
+
+      <!-- Articles grid -->
+      <div class="lg:col-span-2">
+        <div class="flex items-end justify-between mb-8">
+          <div>
+            <h3 class="font-serif-display text-3xl">Derniers articles</h3>
+            <p class="text-sm text-zinc-500 mt-1">Triés par recommandation, basée sur vos favoris</p>
+          </div>
+          <select class="text-sm text-zinc-700 bg-white border border-zinc-200 rounded-lg px-3 py-2">
+            <option>Plus récents</option>
+            <option>Plus aimés</option>
+            <option>Plus lus</option>
+          </select>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          <!-- Card -->
+          <article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+            <div class="aspect-[5/3] bg-gradient-to-br from-emerald-300 via-teal-400 to-cyan-500 relative">
+              <button class="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition">
+                <svg class="w-4 h-4 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              </button>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-xs font-medium text-emerald-700 mb-3">
+                <span>SCIENCES</span><span class="text-zinc-300">·</span><span class="text-zinc-500">5 min</span>
+              </div>
+              <h4 class="font-serif-display text-2xl leading-snug mb-2 group-hover:text-amber-800 transition">
+                <a href="article.html">Les océans absorbent-ils encore notre carbone&nbsp;?</a>
+              </h4>
+              <p class="text-sm text-zinc-600 line-clamp-2">Une étude récente du CNRS révèle un essoufflement inattendu de la pompe biologique dans l'Atlantique nord.</p>
+              <div class="mt-5 flex items-center justify-between text-xs text-zinc-500">
+                <span>Léa Marchand · 11 avr.</span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
+                  142
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+            <div class="aspect-[5/3] bg-gradient-to-br from-violet-300 via-purple-400 to-fuchsia-500 relative">
+              <button class="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition">
+                <svg class="w-4 h-4 text-rose-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </button>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-xs font-medium text-violet-700 mb-3">
+                <span>LITTÉRATURE</span><span class="text-zinc-300">·</span><span class="text-zinc-500">7 min</span>
+              </div>
+              <h4 class="font-serif-display text-2xl leading-snug mb-2 group-hover:text-amber-800 transition">
+                <a href="article.html">Annie Ernaux et la mémoire comme matière première</a>
+              </h4>
+              <p class="text-sm text-zinc-600 line-clamp-2">Relire l'œuvre de la prix Nobel à l'aune de ses entretiens récents : une autobiographie collective en construction.</p>
+              <div class="mt-5 flex items-center justify-between text-xs text-zinc-500">
+                <span>Mathis Renard · 10 avr.</span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5 text-rose-500" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
+                  287
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+            <div class="aspect-[5/3] bg-gradient-to-br from-orange-300 via-amber-400 to-yellow-500 relative">
+              <button class="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition">
+                <svg class="w-4 h-4 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              </button>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-xs font-medium text-amber-700 mb-3">
+                <span>HISTOIRE</span><span class="text-zinc-300">·</span><span class="text-zinc-500">12 min</span>
+              </div>
+              <h4 class="font-serif-display text-2xl leading-snug mb-2 group-hover:text-amber-800 transition">
+                <a href="article.html">1973 : l'année où le pétrole a redessiné le monde</a>
+              </h4>
+              <p class="text-sm text-zinc-600 line-clamp-2">Cinquante ans après, retour sur le choc qui inventa l'économie mondialisée et l'écologie politique.</p>
+              <div class="mt-5 flex items-center justify-between text-xs text-zinc-500">
+                <span>Jean Costa · 9 avr.</span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
+                  98
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+            <div class="aspect-[5/3] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 relative">
+              <button class="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition">
+                <svg class="w-4 h-4 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              </button>
+              <span class="absolute bottom-3 left-3 px-2 py-1 text-[10px] font-semibold bg-white/95 rounded">LONG FORMAT</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-xs font-medium text-zinc-700 mb-3">
+                <span>TECHNOLOGIE</span><span class="text-zinc-300">·</span><span class="text-zinc-500">18 min</span>
+              </div>
+              <h4 class="font-serif-display text-2xl leading-snug mb-2 group-hover:text-amber-800 transition">
+                <a href="article.html">Ce que l'IA générative change vraiment au métier d'éditeur</a>
+              </h4>
+              <p class="text-sm text-zinc-600 line-clamp-2">Enquête en six maisons d'édition françaises : entre fascination, panique morale et nouveaux ateliers d'écriture assistée.</p>
+              <div class="mt-5 flex items-center justify-between text-xs text-zinc-500">
+                <span>Sofia Reyes · 7 avr.</span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
+                  512
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-10 flex justify-center">
+          <button class="px-6 py-3 text-sm font-medium bg-white border border-zinc-300 rounded-full hover:bg-zinc-50 transition">
+            Charger plus d'articles
+          </button>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-8">
+        <div class="bg-white border border-zinc-200/70 rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-5">
+            <h4 class="font-serif-display text-xl">Mes catégories suivies</h4>
+            <button class="text-xs font-medium text-amber-700 hover:text-amber-900">Gérer</button>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                <span class="text-sm font-medium">Sciences</span>
+              </div>
+              <span class="text-xs text-zinc-400">24 articles</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                <span class="text-sm font-medium">Philosophie</span>
+              </div>
+              <span class="text-xs text-zinc-400">12 articles</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-2 h-2 bg-violet-500 rounded-full"></span>
+                <span class="text-sm font-medium">Littérature</span>
+              </div>
+              <span class="text-xs text-zinc-400">18 articles</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-zinc-900 text-stone-50 rounded-2xl p-6">
+          <span class="text-xs uppercase tracking-widest text-amber-400">Le tendance</span>
+          <h4 class="font-serif-display text-2xl mt-3 mb-4 leading-tight">
+            « L'attention est devenue la nouvelle terre rare »
+          </h4>
+          <p class="text-sm text-zinc-300 mb-5">
+            Conversation avec Yves Citton sur l'écologie de l'attention, dix ans après la parution de son essai majeur.
+          </p>
+          <a href="article.html" class="inline-flex items-center gap-2 text-sm font-medium text-amber-400 hover:text-amber-300">
+            Lire l'entretien
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
+          <h4 class="font-serif-display text-xl mb-2">La newsletter</h4>
+          <p class="text-sm text-zinc-700 mb-4">Le dimanche, une sélection de 3 articles. Sans bruit.</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="votre@email.fr" class="flex-1 px-3 py-2 text-sm bg-white border border-amber-200 rounded-lg focus:outline-none focus:border-amber-500" />
+            <button class="px-4 py-2 text-sm font-medium bg-zinc-900 text-stone-50 rounded-lg hover:bg-zinc-700 transition">OK</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="border-t border-zinc-200 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-12 grid md:grid-cols-4 gap-8">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center">
+            <span class="font-serif-display text-stone-50 text-xl leading-none">I</span>
+          </div>
+          <span class="font-serif-display text-2xl">Inkwell</span>
+        </div>
+        <p class="text-sm text-zinc-600 max-w-sm">Un magazine éditorial indépendant. Publié à Paris depuis 2024.</p>
+      </div>
+      <div>
+        <h5 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-4">Explorer</h5>
+        <ul class="space-y-2 text-sm text-zinc-700">
+          <li><a href="#" class="hover:text-zinc-900">Catégories</a></li>
+          <li><a href="#" class="hover:text-zinc-900">Auteurs</a></li>
+          <li><a href="#" class="hover:text-zinc-900">Archives</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-4">Compte</h5>
+        <ul class="space-y-2 text-sm text-zinc-700">
+          <li><a href="login.html" class="hover:text-zinc-900">Connexion</a></li>
+          <li><a href="login.html" class="hover:text-zinc-900">Inscription</a></li>
+          <li><a href="admin/articles.html" class="hover:text-zinc-900">Espace admin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-zinc-100 py-6 text-center text-xs text-zinc-500">
+      © 2026 Inkwell. Tous droits réservés.
+    </div>
+  </footer>
+
+</body>
+</html>

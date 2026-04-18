@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nouvel article — Admin Inkwell</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-serif-display { font-family: 'Instrument Serif', serif; letter-spacing: -0.02em; }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 antialiased">
+  <div class="flex min-h-screen">
+
+    <!-- ============== SIDEBAR ============== -->
+    <aside class="w-64 bg-zinc-950 text-zinc-300 flex flex-col fixed inset-y-0 left-0">
+      <div class="px-6 py-6 border-b border-zinc-800">
+        <a href="../index.html" class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center">
+            <span class="font-serif-display text-zinc-950 text-xl leading-none">I</span>
+          </div>
+          <div>
+            <p class="font-serif-display text-stone-50 text-lg leading-tight">Inkwell</p>
+            <p class="text-[10px] uppercase tracking-widest text-zinc-500">Back-Office</p>
+          </div>
+        </a>
+      </div>
+
+      <nav class="flex-1 px-3 py-6 space-y-1">
+        <p class="px-3 mb-2 text-[10px] uppercase tracking-widest text-zinc-500">Contenu</p>
+        <a href="articles.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-zinc-800 text-stone-50 text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          Articles
+        </a>
+        <a href="categories.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-900 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+          Catégories
+        </a>
+        <p class="px-3 mt-6 mb-2 text-[10px] uppercase tracking-widest text-zinc-500">Analyses</p>
+        <a href="stats.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-900 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Statistiques
+        </a>
+      </nav>
+
+      <div class="px-3 py-4 border-t border-zinc-800">
+        <div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-900 transition cursor-pointer">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-rose-500"></div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-stone-50 truncate">Camille Aubert</p>
+            <p class="text-xs text-zinc-500 truncate">Administrateur</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============== MAIN ============== -->
+    <main class="flex-1 ml-64">
+
+      <header class="h-16 bg-white border-b border-zinc-200 flex items-center justify-between px-8 sticky top-0 z-30">
+        <div class="flex items-center gap-2 text-sm text-zinc-500">
+          <a href="articles.html" class="hover:text-zinc-900">Articles</a>
+          <span>/</span>
+          <span class="text-zinc-900 font-medium">Nouvel article</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-zinc-500 mr-2">Sauvegardé il y a 2 min</span>
+          <button class="px-4 py-2 text-sm font-medium text-zinc-700 bg-white border border-zinc-200 rounded-lg hover:bg-zinc-50 transition">
+            Enregistrer en brouillon
+          </button>
+          <button class="px-4 py-2 text-sm font-medium text-stone-50 bg-zinc-900 rounded-lg hover:bg-zinc-700 transition">
+            Publier
+          </button>
+        </div>
+      </header>
+
+      <div class="p-8">
+        <div class="grid grid-cols-3 gap-8">
+
+          <!-- ====== Form principal (2/3) ====== -->
+          <form class="col-span-2 space-y-6">
+
+            <div class="bg-white border border-zinc-200 rounded-2xl p-8">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Titre</label>
+              <input type="text"
+                     placeholder="Donnez un titre à votre article…"
+                     class="w-full font-serif-display text-4xl bg-transparent border-0 focus:outline-none placeholder:text-zinc-300" />
+
+              <div class="border-t border-zinc-100 my-6"></div>
+
+              <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Résumé</label>
+              <textarea rows="3"
+                        placeholder="Résumé qui apparaîtra sous le titre dans le feed (max 500 caractères)…"
+                        class="w-full text-lg text-zinc-700 bg-transparent border-0 focus:outline-none resize-none placeholder:text-zinc-300"></textarea>
+            </div>
+
+            <div class="bg-white border border-zinc-200 rounded-2xl overflow-hidden">
+              <!-- Toolbar -->
+              <div class="flex items-center gap-1 px-4 py-2 border-b border-zinc-100 bg-zinc-50/50">
+                <button type="button" class="w-8 h-8 rounded hover:bg-white flex items-center justify-center text-zinc-700 font-bold">B</button>
+                <button type="button" class="w-8 h-8 rounded hover:bg-white flex items-center justify-center text-zinc-700 italic">I</button>
+                <button type="button" class="w-8 h-8 rounded hover:bg-white flex items-center justify-center text-zinc-700 underline">U</button>
+                <span class="w-px h-5 bg-zinc-200 mx-2"></span>
+                <button type="button" class="px-2 h-8 rounded hover:bg-white text-sm text-zinc-700">H1</button>
+                <button type="button" class="px-2 h-8 rounded hover:bg-white text-sm text-zinc-700">H2</button>
+                <button type="button" class="px-2 h-8 rounded hover:bg-white text-sm text-zinc-700">Citation</button>
+                <span class="w-px h-5 bg-zinc-200 mx-2"></span>
+                <button type="button" class="w-8 h-8 rounded hover:bg-white flex items-center justify-center text-zinc-700">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                </button>
+                <button type="button" class="w-8 h-8 rounded hover:bg-white flex items-center justify-center text-zinc-700">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </button>
+              </div>
+
+              <textarea rows="20"
+                        placeholder="Commencez à écrire…"
+                        class="w-full p-8 text-lg leading-relaxed bg-transparent border-0 focus:outline-none resize-none placeholder:text-zinc-300"></textarea>
+            </div>
+
+          </form>
+
+          <!-- ====== Sidebar form (1/3) ====== -->
+          <aside class="space-y-6">
+
+            <div class="bg-white border border-zinc-200 rounded-2xl p-6">
+              <h3 class="font-medium text-zinc-900 mb-4">Publication</h3>
+
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-xs font-medium text-zinc-500 mb-1.5">Statut</label>
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                    <span class="text-sm">Brouillon</span>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-zinc-500 mb-1.5">Visibilité</label>
+                  <select class="w-full px-3 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg">
+                    <option>Public</option>
+                    <option>Privé</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-zinc-500 mb-1.5">Date de publication</label>
+                  <input type="datetime-local" class="w-full px-3 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg" />
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-zinc-200 rounded-2xl p-6">
+              <h3 class="font-medium text-zinc-900 mb-4">Catégorie</h3>
+              <select class="w-full px-3 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg">
+                <option>Sélectionner une catégorie…</option>
+                <option>Sciences</option>
+                <option>Littérature</option>
+                <option>Philosophie</option>
+                <option>Histoire</option>
+                <option>Société</option>
+                <option>Technologie</option>
+                <option>Arts</option>
+              </select>
+              <button class="mt-3 text-xs text-amber-700 hover:text-amber-900 font-medium">+ Créer une catégorie</button>
+            </div>
+
+            <div class="bg-white border border-zinc-200 rounded-2xl p-6">
+              <h3 class="font-medium text-zinc-900 mb-4">Auteur</h3>
+              <div class="flex items-center gap-3 p-3 bg-zinc-50 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-rose-500"></div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium">Camille Aubert</p>
+                  <p class="text-xs text-zinc-500">camille@inkwell.fr</p>
+                </div>
+                <button class="text-xs text-zinc-500 hover:text-zinc-900">Changer</button>
+              </div>
+            </div>
+
+            <div class="bg-white border border-zinc-200 rounded-2xl p-6">
+              <h3 class="font-medium text-zinc-900 mb-4">Image de couverture</h3>
+              <div class="aspect-[4/3] border-2 border-dashed border-zinc-200 rounded-xl flex flex-col items-center justify-center text-zinc-400 hover:border-zinc-400 hover:text-zinc-600 transition cursor-pointer">
+                <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <p class="text-xs">Glissez une image ou <span class="text-amber-700 font-medium">parcourir</span></p>
+              </div>
+            </div>
+
+            <div class="bg-rose-50 border border-rose-200 rounded-2xl p-6">
+              <h3 class="font-medium text-rose-900 mb-2">Zone dangereuse</h3>
+              <p class="text-xs text-rose-700 mb-3">Cette action est irréversible.</p>
+              <button class="w-full px-3 py-2 text-sm font-medium text-rose-700 bg-white border border-rose-200 rounded-lg hover:bg-rose-100 transition">
+                Supprimer cet article
+              </button>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articles — Admin Inkwell</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-serif-display { font-family: 'Instrument Serif', serif; letter-spacing: -0.02em; }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 antialiased">
+  <div class="flex min-h-screen">
+
+    <!-- ============== SIDEBAR ============== -->
+    <aside class="w-64 bg-zinc-950 text-zinc-300 flex flex-col fixed inset-y-0 left-0">
+      <div class="px-6 py-6 border-b border-zinc-800">
+        <a href="../index.html" class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center">
+            <span class="font-serif-display text-zinc-950 text-xl leading-none">I</span>
+          </div>
+          <div>
+            <p class="font-serif-display text-stone-50 text-lg leading-tight">Inkwell</p>
+            <p class="text-[10px] uppercase tracking-widest text-zinc-500">Back-Office</p>
+          </div>
+        </a>
+      </div>
+
+      <nav class="flex-1 px-3 py-6 space-y-1">
+        <p class="px-3 mb-2 text-[10px] uppercase tracking-widest text-zinc-500">Contenu</p>
+        <a href="articles.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-zinc-800 text-stone-50 text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          Articles
+          <span class="ml-auto text-xs bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">340</span>
+        </a>
+        <a href="categories.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-900 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+          Catégories
+        </a>
+
+        <p class="px-3 mt-6 mb-2 text-[10px] uppercase tracking-widest text-zinc-500">Analyses</p>
+        <a href="stats.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-900 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Statistiques
+        </a>
+
+        <p class="px-3 mt-6 mb-2 text-[10px] uppercase tracking-widest text-zinc-500">Communauté</p>
+        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-900 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          Utilisateurs
+        </a>
+      </nav>
+
+      <div class="px-3 py-4 border-t border-zinc-800">
+        <div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-900 transition cursor-pointer">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-rose-500"></div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-stone-50 truncate">Camille Aubert</p>
+            <p class="text-xs text-zinc-500 truncate">Administrateur</p>
+          </div>
+          <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============== MAIN ============== -->
+    <main class="flex-1 ml-64">
+
+      <!-- Topbar -->
+      <header class="h-16 bg-white border-b border-zinc-200 flex items-center justify-between px-8 sticky top-0 z-30">
+        <div class="flex items-center gap-2 text-sm text-zinc-500">
+          <a href="#" class="hover:text-zinc-900">Tableau de bord</a>
+          <span>/</span>
+          <span class="text-zinc-900 font-medium">Articles</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-zinc-100 transition">
+            <svg class="w-5 h-5 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          </button>
+          <a href="../index.html" class="text-sm text-zinc-600 hover:text-zinc-900">Voir le site</a>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="p-8">
+
+        <!-- Page header -->
+        <div class="flex items-end justify-between mb-8">
+          <div>
+            <h1 class="font-serif-display text-4xl mb-1">Articles</h1>
+            <p class="text-sm text-zinc-500">Gérez l'ensemble du contenu publié sur Inkwell.</p>
+          </div>
+          <a href="article-form.html" class="inline-flex items-center gap-2 px-4 py-2.5 bg-zinc-900 text-stone-50 rounded-xl text-sm font-medium hover:bg-zinc-700 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Nouvel article
+          </a>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-4 gap-4 mb-8">
+          <div class="bg-white border border-zinc-200 rounded-2xl p-5">
+            <p class="text-xs text-zinc-500 uppercase tracking-wider">Total publiés</p>
+            <p class="font-serif-display text-3xl mt-2">340</p>
+            <p class="text-xs text-emerald-600 mt-1">+12 ce mois</p>
+          </div>
+          <div class="bg-white border border-zinc-200 rounded-2xl p-5">
+            <p class="text-xs text-zinc-500 uppercase tracking-wider">Brouillons</p>
+            <p class="font-serif-display text-3xl mt-2">7</p>
+            <p class="text-xs text-zinc-400 mt-1">À relire</p>
+          </div>
+          <div class="bg-white border border-zinc-200 rounded-2xl p-5">
+            <p class="text-xs text-zinc-500 uppercase tracking-wider">Vues totales</p>
+            <p class="font-serif-display text-3xl mt-2">1,2M</p>
+            <p class="text-xs text-emerald-600 mt-1">+8% vs mois dernier</p>
+          </div>
+          <div class="bg-white border border-zinc-200 rounded-2xl p-5">
+            <p class="text-xs text-zinc-500 uppercase tracking-wider">Likes ce mois</p>
+            <p class="font-serif-display text-3xl mt-2">3 421</p>
+            <p class="text-xs text-emerald-600 mt-1">+24%</p>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white border border-zinc-200 rounded-2xl mb-4">
+          <div class="p-4 flex items-center gap-3 border-b border-zinc-100">
+            <div class="relative flex-1 max-w-md">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" placeholder="Rechercher un article par titre, auteur…"
+                     class="w-full pl-10 pr-4 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-900 focus:bg-white transition" />
+            </div>
+            <select class="px-3 py-2 text-sm bg-white border border-zinc-200 rounded-lg">
+              <option>Toutes catégories</option>
+              <option>Sciences</option>
+              <option>Littérature</option>
+              <option>Philosophie</option>
+            </select>
+            <select class="px-3 py-2 text-sm bg-white border border-zinc-200 rounded-lg">
+              <option>Tous auteurs</option>
+            </select>
+            <select class="px-3 py-2 text-sm bg-white border border-zinc-200 rounded-lg">
+              <option>Plus récents</option>
+              <option>Plus de vues</option>
+              <option>Plus likés</option>
+            </select>
+          </div>
+
+          <!-- Table -->
+          <table class="w-full">
+            <thead>
+              <tr class="text-left text-xs uppercase tracking-wider text-zinc-500 border-b border-zinc-100">
+                <th class="px-6 py-3 w-8"><input type="checkbox" class="rounded border-zinc-300"></th>
+                <th class="px-6 py-3">Article</th>
+                <th class="px-6 py-3">Catégorie</th>
+                <th class="px-6 py-3">Auteur</th>
+                <th class="px-6 py-3 text-right">Vues</th>
+                <th class="px-6 py-3 text-right">Likes</th>
+                <th class="px-6 py-3">Publié le</th>
+                <th class="px-6 py-3 w-8"></th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+
+              <tr class="border-b border-zinc-100 hover:bg-zinc-50 transition">
+                <td class="px-6 py-4"><input type="checkbox" class="rounded border-zinc-300"></td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-300 to-fuchsia-500 shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-zinc-900">Le cerveau bayésien : pourquoi nous prédisons plus que nous ne percevons</p>
+                      <p class="text-xs text-zinc-500 mt-0.5">8 min de lecture</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="px-2.5 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">Sciences</span>
+                </td>
+                <td class="px-6 py-4 text-zinc-600">Camille Aubert</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">42 184</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">328</td>
+                <td class="px-6 py-4 text-zinc-500">12 avr. 2026</td>
+                <td class="px-6 py-4">
+                  <button class="w-8 h-8 rounded-lg hover:bg-zinc-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-zinc-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="border-b border-zinc-100 hover:bg-zinc-50 transition">
+                <td class="px-6 py-4"><input type="checkbox" class="rounded border-zinc-300"></td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-emerald-300 to-cyan-500 shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-zinc-900">Les océans absorbent-ils encore notre carbone&nbsp;?</p>
+                      <p class="text-xs text-zinc-500 mt-0.5">5 min de lecture</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="px-2.5 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">Sciences</span>
+                </td>
+                <td class="px-6 py-4 text-zinc-600">Léa Marchand</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">18 902</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">142</td>
+                <td class="px-6 py-4 text-zinc-500">11 avr. 2026</td>
+                <td class="px-6 py-4">
+                  <button class="w-8 h-8 rounded-lg hover:bg-zinc-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-zinc-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="border-b border-zinc-100 hover:bg-zinc-50 transition">
+                <td class="px-6 py-4"><input type="checkbox" class="rounded border-zinc-300"></td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-300 to-fuchsia-500 shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-zinc-900">Annie Ernaux et la mémoire comme matière première</p>
+                      <p class="text-xs text-zinc-500 mt-0.5">7 min de lecture</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="px-2.5 py-1 text-xs font-medium bg-violet-100 text-violet-800 rounded-full">Littérature</span>
+                </td>
+                <td class="px-6 py-4 text-zinc-600">Mathis Renard</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">31 045</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">287</td>
+                <td class="px-6 py-4 text-zinc-500">10 avr. 2026</td>
+                <td class="px-6 py-4">
+                  <button class="w-8 h-8 rounded-lg hover:bg-zinc-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-zinc-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="border-b border-zinc-100 hover:bg-zinc-50 transition">
+                <td class="px-6 py-4"><input type="checkbox" class="rounded border-zinc-300"></td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-300 to-yellow-500 shrink-0"></div>
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <p class="font-medium text-zinc-900">1973 : l'année où le pétrole a redessiné le monde</p>
+                        <span class="px-1.5 py-0.5 text-[10px] font-semibold bg-zinc-100 text-zinc-600 rounded">BROUILLON</span>
+                      </div>
+                      <p class="text-xs text-zinc-500 mt-0.5">12 min de lecture</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="px-2.5 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">Histoire</span>
+                </td>
+                <td class="px-6 py-4 text-zinc-600">Jean Costa</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-400">—</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-400">—</td>
+                <td class="px-6 py-4 text-zinc-500">—</td>
+                <td class="px-6 py-4">
+                  <button class="w-8 h-8 rounded-lg hover:bg-zinc-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-zinc-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="border-b border-zinc-100 hover:bg-zinc-50 transition">
+                <td class="px-6 py-4"><input type="checkbox" class="rounded border-zinc-300"></td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-zinc-700 to-zinc-900 shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-zinc-900">Ce que l'IA générative change vraiment au métier d'éditeur</p>
+                      <p class="text-xs text-zinc-500 mt-0.5">18 min de lecture</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <span class="px-2.5 py-1 text-xs font-medium bg-zinc-100 text-zinc-800 rounded-full">Technologie</span>
+                </td>
+                <td class="px-6 py-4 text-zinc-600">Sofia Reyes</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">68 211</td>
+                <td class="px-6 py-4 text-right tabular-nums text-zinc-900 font-medium">512</td>
+                <td class="px-6 py-4 text-zinc-500">7 avr. 2026</td>
+                <td class="px-6 py-4">
+                  <button class="w-8 h-8 rounded-lg hover:bg-zinc-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-zinc-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                  </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <div class="flex items-center justify-between px-6 py-4 border-t border-zinc-100">
+            <p class="text-xs text-zinc-500">Affichage de <span class="font-medium text-zinc-900">1–5</span> sur <span class="font-medium text-zinc-900">340</span> articles</p>
+            <div class="flex items-center gap-1">
+              <button class="px-3 py-1.5 text-sm border border-zinc-200 rounded-lg hover:bg-zinc-50 disabled:opacity-40" disabled>Précédent</button>
+              <button class="w-8 h-8 text-sm bg-zinc-900 text-stone-50 rounded-lg">1</button>
+              <button class="w-8 h-8 text-sm hover:bg-zinc-100 rounded-lg">2</button>
+              <button class="w-8 h-8 text-sm hover:bg-zinc-100 rounded-lg">3</button>
+              <span class="px-2 text-zinc-400">…</span>
+              <button class="w-8 h-8 text-sm hover:bg-zinc-100 rounded-lg">68</button>
+              <button class="px-3 py-1.5 text-sm border border-zinc-200 rounded-lg hover:bg-zinc-50">Suivant</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le cerveau bayésien — Inkwell</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-serif-display { font-family: 'Instrument Serif', serif; letter-spacing: -0.02em; }
+    .prose-article p { font-size: 1.125rem; line-height: 1.8; color: #3f3f46; margin-bottom: 1.5rem; }
+    .prose-article p:first-of-type::first-letter {
+      font-family: 'Instrument Serif', serif;
+      font-size: 4.5rem; float: left; line-height: 0.85;
+      padding-right: 0.75rem; padding-top: 0.5rem; color: #b45309;
+    }
+    .prose-article h2 { font-family: 'Instrument Serif', serif; font-size: 2rem; margin-top: 3rem; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+    .prose-article blockquote {
+      border-left: 3px solid #b45309; padding-left: 1.5rem; margin: 2rem 0;
+      font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-style: italic; color: #18181b;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-zinc-900 antialiased">
+
+  <!-- ============== HEADER ============== -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-stone-50/80 border-b border-zinc-200/60">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center">
+          <span class="font-serif-display text-stone-50 text-xl leading-none">I</span>
+        </div>
+        <span class="font-serif-display text-2xl">Inkwell</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+        <a href="index.html" class="hover:text-zinc-900">Accueil</a>
+        <a href="#" class="hover:text-zinc-900">Catégories</a>
+        <a href="#" class="hover:text-zinc-900">Favoris</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="login.html" class="text-sm font-medium text-zinc-700 hover:text-zinc-900">Connexion</a>
+        <a href="login.html" class="text-sm font-medium px-4 py-2 bg-zinc-900 text-stone-50 rounded-lg hover:bg-zinc-700 transition">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============== ARTICLE HERO ============== -->
+  <article class="max-w-3xl mx-auto px-6 pt-16 pb-12">
+    <a href="index.html" class="inline-flex items-center gap-1 text-sm text-zinc-500 hover:text-zinc-900 transition mb-8">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Retour au feed
+    </a>
+
+    <div class="flex items-center gap-3 text-sm mb-6">
+      <a href="#" class="px-3 py-1 bg-amber-100 text-amber-800 font-medium rounded-full text-xs">Sciences</a>
+      <span class="text-zinc-400">·</span>
+      <span class="text-zinc-500">8 min de lecture</span>
+      <span class="text-zinc-400">·</span>
+      <span class="text-zinc-500">12 avril 2026</span>
+    </div>
+
+    <h1 class="font-serif-display text-5xl md:text-6xl leading-[1.05] mb-8">
+      Le cerveau bayésien : pourquoi nous prédisons plus que nous ne percevons
+    </h1>
+
+    <p class="text-xl text-zinc-600 leading-relaxed mb-10">
+      La perception serait moins une caméra qu'un pari. Karl Friston et le principe d'énergie libre ont bouleversé notre compréhension de la conscience. Récit d'une révolution silencieuse en neurosciences.
+    </p>
+
+    <div class="flex items-center justify-between py-6 border-y border-zinc-200">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center">
+          <span class="text-stone-50 font-medium">CA</span>
+        </div>
+        <div>
+          <p class="font-medium">Camille Aubert</p>
+          <p class="text-sm text-zinc-500">Journaliste scientifique</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 rounded-full hover:border-rose-400 hover:text-rose-600 transition group">
+          <svg class="w-4 h-4 group-hover:fill-rose-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          <span class="text-sm font-medium">328</span>
+        </button>
+        <button class="w-10 h-10 flex items-center justify-center bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+        </button>
+        <button class="w-10 h-10 flex items-center justify-center bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+        </button>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============== IMAGE ARTICLE ============== -->
+  <div class="max-w-5xl mx-auto px-6 mb-12">
+    <div class="aspect-[16/9] rounded-3xl bg-gradient-to-br from-amber-300 via-rose-400 to-fuchsia-500 relative overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4),transparent_50%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,0,0,0.2),transparent_50%)]"></div>
+    </div>
+    <p class="text-xs text-zinc-500 mt-3 text-center italic">Illustration générée par Sofia Lemaire pour Inkwell</p>
+  </div>
+
+  <!-- ============== CORPS DE L'ARTICLE ============== -->
+  <div class="max-w-3xl mx-auto px-6 prose-article pb-16">
+    <p>
+      Imaginez un instant que votre cerveau ne perçoive pas le monde, mais qu'il le devine. Que ce que vous tenez pour la réalité immédiate — la couleur du ciel, la texture du tissu sous vos doigts, le timbre d'une voix amie — soit en vérité une hypothèse en perpétuelle révision. C'est exactement ce que postule, depuis une vingtaine d'années, un courant majeur des neurosciences computationnelles.
+    </p>
+    <p>
+      L'idée est d'une élégance vertigineuse. Le cerveau ne serait pas un organe passif, recevant des données brutes des sens et les interprétant après coup. Il serait un moteur prédictif, formulant en permanence des hypothèses sur ce qui devrait arriver, et n'attendant des sens qu'une seule chose : la confirmation, ou l'erreur de prédiction.
+    </p>
+
+    <h2>Une révolution venue de Londres</h2>
+
+    <p>
+      Le nom qui revient sans cesse dans cette histoire est celui de Karl Friston, neuroscientifique britannique du University College de Londres. Auteur le plus cité au monde dans son domaine, il a formalisé en 2010 ce qu'il appelle le principe d'énergie libre — un cadre théorique qui prétend unifier la perception, l'action, et même la vie elle-même.
+    </p>
+
+    <blockquote>
+      « Tout ce qui résiste à l'entropie, des bactéries aux cathédrales mentales, doit minimiser ses surprises. C'est la définition même d'être vivant. »
+    </blockquote>
+
+    <p>
+      Dans cette perspective, la conscience n'est pas le produit d'un traitement linéaire de l'information. Elle émerge d'une danse continue entre les attentes du cerveau et le retour des sens. Quand l'écart est faible, nous percevons. Quand il est grand, nous apprenons.
+    </p>
+
+    <h2>Ce que cela change, concrètement</h2>
+
+    <p>
+      Cette théorie n'est pas qu'un raffinement académique. Elle propose des explications nouvelles à des phénomènes aussi disparates que les hallucinations, l'autisme, ou la dépression — toutes envisagées comme des dérèglements de la balance entre prédiction et perception.
+    </p>
+    <p>
+      Les premières applications cliniques émergent. Au CHU de Genève, une équipe utilise ce cadre pour mieux comprendre les psychoses naissantes chez de jeunes patients. À Stanford, des chercheurs s'en servent pour modéliser la réponse aux antidépresseurs. La théorie quitte les laboratoires.
+    </p>
+  </div>
+
+  <!-- ============== ACTIONS DE FIN ============== -->
+  <div class="max-w-3xl mx-auto px-6 pb-16">
+    <div class="flex items-center justify-between p-6 bg-white border border-zinc-200 rounded-2xl">
+      <div>
+        <p class="text-sm text-zinc-500 mb-1">Vous avez aimé cet article ?</p>
+        <p class="font-serif-display text-xl">Suivez la catégorie Sciences</p>
+      </div>
+      <button class="flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-stone-50 rounded-full hover:bg-zinc-700 transition text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Suivre
+      </button>
+    </div>
+  </div>
+
+  <!-- ============== ARTICLES SIMILAIRES ============== -->
+  <section class="max-w-5xl mx-auto px-6 pb-24">
+    <h3 class="font-serif-display text-3xl mb-8">À lire ensuite</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+        <div class="aspect-[5/3] bg-gradient-to-br from-emerald-300 to-cyan-500"></div>
+        <div class="p-5">
+          <span class="text-xs font-medium text-emerald-700">SCIENCES</span>
+          <h4 class="font-serif-display text-xl mt-2 mb-2 leading-snug group-hover:text-amber-800 transition">
+            Les océans absorbent-ils encore notre carbone&nbsp;?
+          </h4>
+          <p class="text-sm text-zinc-500">Léa Marchand · 5 min</p>
+        </div>
+      </article>
+      <article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+        <div class="aspect-[5/3] bg-gradient-to-br from-violet-300 to-fuchsia-500"></div>
+        <div class="p-5">
+          <span class="text-xs font-medium text-violet-700">PHILOSOPHIE</span>
+          <h4 class="font-serif-display text-xl mt-2 mb-2 leading-snug group-hover:text-amber-800 transition">
+            Bergson, ou le temps qui résiste à la mesure
+          </h4>
+          <p class="text-sm text-zinc-500">Paul Vidal · 9 min</p>
+        </div>
+      </article>
+      <article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+        <div class="aspect-[5/3] bg-gradient-to-br from-zinc-700 to-zinc-900"></div>
+        <div class="p-5">
+          <span class="text-xs font-medium text-zinc-700">TECHNOLOGIE</span>
+          <h4 class="font-serif-display text-xl mt-2 mb-2 leading-snug group-hover:text-amber-800 transition">
+            Ce que l'IA générative change vraiment
+          </h4>
+          <p class="text-sm text-zinc-500">Sofia Reyes · 18 min</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="border-t border-zinc-200 bg-white py-8 text-center text-xs text-zinc-500">
+    © 2026 Inkwell. Tous droits réservés.
+  </footer>
+
+</body>
+</html>
