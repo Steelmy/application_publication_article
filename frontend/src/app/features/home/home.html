@@ -1,15 +1,97 @@
-<main class="min-h-screen flex items-center justify-center px-6">
-  <div class="text-center max-w-2xl">
-    <div class="inline-flex items-center gap-2 px-3 py-1 mb-8 bg-amber-100 border border-amber-200 rounded-full">
-      <span class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span>
-      <span class="text-xs font-medium text-amber-900">Setup terminé</span>
+<app-header />
+
+<section class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-12">
+  <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 bg-amber-100 border border-amber-200 rounded-full">
+        <span class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span>
+        <span class="text-xs font-medium text-amber-900">Le magazine d'idées</span>
+      </div>
+      <h1 class="font-serif-display text-5xl md:text-7xl leading-[0.95]">
+        Des idées qui <em class="italic text-amber-700">durent</em>,<br />
+        des récits qui <em class="italic">comptent</em>.
+      </h1>
+      <p class="mt-6 text-lg text-zinc-600 max-w-xl">
+        Un magazine éditorial autour des sciences, de la littérature et de la culture contemporaine. Lisez, aimez, suivez vos catégories préférées.
+      </p>
     </div>
-    <h1 class="font-serif-display text-6xl md:text-7xl leading-none mb-6">
-      Bienvenue sur <em class="italic text-amber-700">Inkwell</em>.
-    </h1>
-    <p class="text-lg text-zinc-600">
-      Le projet Angular est initialisé, Tailwind v4 est branché, les polices Inter et Instrument Serif sont chargées.
-    </p>
-    <p class="mt-8 text-sm text-zinc-500">Étape 1 : <span class="font-medium text-zinc-900">setup terminé</span> · Étape 2 : authentification</p>
   </div>
-</main>
+</section>
+
+@if (categoriesDistinctes().length > 0) {
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-10">
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+      <button class="shrink-0 px-4 py-2 text-sm font-medium bg-zinc-900 text-stone-50 rounded-full">Tout</button>
+      @for (nom of categoriesDistinctes(); track nom) {
+        <button class="shrink-0 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+          {{ nom }}
+        </button>
+      }
+    </div>
+  </section>
+}
+
+@if (enChargement()) {
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center text-zinc-500">
+    <div class="inline-block w-6 h-6 border-2 border-zinc-300 border-t-zinc-900 rounded-full animate-spin"></div>
+    <p class="mt-4 text-sm">Chargement des articles…</p>
+  </section>
+} @else if (erreur()) {
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center">
+    <p class="text-sm text-rose-700 bg-rose-50 border border-rose-200 inline-block px-4 py-2 rounded-lg">
+      Impossible de charger les articles. Le serveur est-il démarré ?
+    </p>
+  </section>
+} @else if ((articles() ?? []).length === 0) {
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center text-zinc-500">
+    <p>Aucun article publié pour le moment.</p>
+  </section>
+} @else {
+  @if (articleUne(); as une) {
+    <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
+      <article class="group relative grid lg:grid-cols-2 gap-8 items-stretch bg-white rounded-3xl overflow-hidden border border-zinc-200/70 hover:shadow-2xl hover:shadow-zinc-900/10 transition-all duration-500">
+        <a [routerLink]="['/articles', une.id]" class="relative aspect-[4/3] lg:aspect-auto bg-gradient-to-br from-amber-300 via-rose-400 to-fuchsia-500 block">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4),transparent_50%)]"></div>
+          <span class="absolute top-6 left-6 px-3 py-1 text-xs font-semibold bg-white/90 backdrop-blur rounded-full">À LA UNE</span>
+        </a>
+        <div class="p-8 lg:p-12 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 text-sm text-zinc-500 mb-4">
+              <span class="font-medium text-amber-700">{{ une.categorie.nomCategorie }}</span>
+              <span>·</span>
+              <span>{{ une.nombreDeVues.toLocaleString('fr-FR') }} vues</span>
+            </div>
+            <h2 class="font-serif-display text-4xl md:text-5xl leading-tight mb-4 group-hover:text-amber-800 transition">
+              <a [routerLink]="['/articles', une.id]">{{ une.titre }}</a>
+            </h2>
+            <p class="text-zinc-600 text-lg leading-relaxed">{{ une.resume }}</p>
+          </div>
+          <div class="mt-8 flex items-center justify-between pt-6 border-t border-zinc-100">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900"></div>
+              <div>
+                <p class="text-sm font-medium">{{ une.auteur.nom }}</p>
+                <p class="text-xs text-zinc-500">Rédaction Inkwell</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  }
+
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h3 class="font-serif-display text-3xl">Derniers articles</h3>
+        <p class="text-sm text-zinc-500 mt-1">Toutes les publications de la rédaction</p>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (article of autresArticles(); track article.id) {
+        <app-article-card [article]="article" />
+      }
+    </div>
+  </section>
+}

@@ -1,0 +1,40 @@
+<article class="group bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+  <div class="relative">
+    <a [routerLink]="['/articles', article().id]" class="block">
+      <div class="aspect-[5/3] bg-gradient-to-br" [class]="'bg-gradient-to-br ' + palette().gradient">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.35),transparent_55%)]"></div>
+      </div>
+    </a>
+    <button (click)="toggleLike($event)"
+            [disabled]="likeEnCours()"
+            class="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition disabled:opacity-50">
+      <svg class="w-4 h-4"
+           [attr.fill]="aLike() ? 'currentColor' : 'none'"
+           [class.text-rose-500]="aLike()"
+           [class.text-zinc-700]="!aLike()"
+           stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    </button>
+  </div>
+  <div class="p-6">
+    <div class="flex items-center gap-2 text-xs font-medium mb-3" [class]="palette().accent">
+      <span class="uppercase tracking-wider">{{ article().categorie.nomCategorie }}</span>
+      <span class="text-zinc-300">·</span>
+      <span class="text-zinc-500">{{ tempsLecture() }} min</span>
+    </div>
+    <h4 class="font-serif-display text-2xl leading-snug mb-2 group-hover:text-amber-800 transition">
+      <a [routerLink]="['/articles', article().id]">{{ article().titre }}</a>
+    </h4>
+    <p class="text-sm text-zinc-600 line-clamp-2">{{ article().resume }}</p>
+    <div class="mt-5 flex items-center justify-between text-xs text-zinc-500">
+      <span>{{ article().auteur.nom }}@if (dateFormatee()) { · {{ dateFormatee() }} }</span>
+      <span class="flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+        </svg>
+        {{ nbLikes() }}
+      </span>
+    </div>
+  </div>
+</article>

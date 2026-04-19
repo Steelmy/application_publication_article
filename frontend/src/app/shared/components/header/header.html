@@ -1,0 +1,43 @@
+<header class="sticky top-0 z-40 backdrop-blur-md bg-stone-50/80 border-b border-zinc-200/60">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+
+    <a routerLink="/" class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center">
+        <span class="font-serif-display text-stone-50 text-xl leading-none">I</span>
+      </div>
+      <span class="font-serif-display text-2xl">Inkwell</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+      <a routerLink="/" class="hover:text-zinc-900 transition">Accueil</a>
+      <a href="#" class="hover:text-zinc-900 transition">Catégories</a>
+      <a href="#" class="hover:text-zinc-900 transition">Favoris</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      @if (auth.estConnecte()) {
+        @if (auth.estAdmin()) {
+          <a href="#" class="hidden sm:inline text-xs font-medium px-3 py-1.5 bg-amber-100 text-amber-900 rounded-full hover:bg-amber-200 transition">
+            Espace admin
+          </a>
+        }
+        <div class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 flex items-center justify-center text-stone-50 text-xs font-semibold">
+            {{ initiales() }}
+          </div>
+          <span class="hidden sm:inline text-sm font-medium text-zinc-700">{{ auth.currentUser()?.nom }}</span>
+        </div>
+        <button (click)="seDeconnecter()"
+                class="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition">
+          Déconnexion
+        </button>
+      } @else {
+        <a routerLink="/login" class="text-sm font-medium text-zinc-700 hover:text-zinc-900">Connexion</a>
+        <a routerLink="/register"
+           class="text-sm font-medium px-4 py-2 bg-zinc-900 text-stone-50 rounded-lg hover:bg-zinc-700 transition">
+          S'inscrire
+        </a>
+      }
+    </div>
+  </div>
+</header>

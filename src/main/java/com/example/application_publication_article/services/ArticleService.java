@@ -8,6 +8,7 @@ import com.example.application_publication_article.repositories.CategorieReposit
 import com.example.application_publication_article.repositories.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,5 +58,30 @@ public class ArticleService {
     // 4. Supprimer un article
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
+    }
+
+    // 5. Toggle like : ajoute le like si absent, le retire sinon.
+    //    Retourne l'état actuel : nombre de likes + si l'utilisateur a liké.
+    @Transactional
+    public LikeEtat toggleLike(Long articleId, Long utilisateurId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new IllegalArgumentException("Erreur : Cet article n'existe pas."));
+
+        Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
+                .orElseThrow(() -> new IllegalArgumentException("Erreur : Cet utilisateur n'existe pas."));
+
+        boolean ajoute;
+        if (article.getLikes().contains(utilisateur)) {
+            article.getLikes().remove(utilisateur);
+            ajoute = false;
+        } else {
+            article.getLikes().add(utilisateur);
+            ajoute = true;
+        }
+        articleRepository.save(article);
+        return new LikeEtat(article.getLikes().size(), ajoute);
+    }
+
+    public record LikeEtat(int nombreLikes, boolean likeParUtilisateur) {
     }
 }

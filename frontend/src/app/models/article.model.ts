@@ -9,6 +9,7 @@ export interface Article {
   nombreDeVues: number;
   categorie: Categorie;
   auteur: Utilisateur;
+  likes?: Utilisateur[];
   createdAt?: string;
   updateAt?: string;
 }

@@ -14,3 +14,36 @@ html, body {
   font-family: var(--font-serif-display);
   letter-spacing: -0.02em;
 }
+
+.prose-article p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #3f3f46;
+  margin-bottom: 1.5rem;
+  white-space: pre-line;
+}
+.prose-article p:first-of-type::first-letter {
+  font-family: var(--font-serif-display);
+  font-size: 4.5rem;
+  float: left;
+  line-height: 0.85;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  color: #b45309;
+}
+.prose-article h2 {
+  font-family: var(--font-serif-display);
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.prose-article blockquote {
+  border-left: 3px solid #b45309;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-family: var(--font-serif-display);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #18181b;
+}

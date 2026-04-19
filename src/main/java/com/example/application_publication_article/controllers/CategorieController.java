@@ -50,4 +50,15 @@ public class CategorieController {
         categorieService.deleteCategorie(id);
         return ResponseEntity.noContent().build(); // Renvoie 204 No Content
     }
+
+    // 5. POST : Toggle follow sur une catégorie
+    @PostMapping("/{id}/follow")
+    public ResponseEntity<?> toggleFollow(@PathVariable Long id, @RequestParam Long utilisateurId) {
+        try {
+            CategorieService.FollowEtat etat = categorieService.toggleFollow(id, utilisateurId);
+            return ResponseEntity.ok(etat);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }

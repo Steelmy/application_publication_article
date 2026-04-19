@@ -43,4 +43,17 @@ public class UtilisateurService {
         // Enfin, on sauvegarde dans la base de données
         return utilisateurRepository.save(nouvelUtilisateur);
     }
+
+    public Utilisateur authentifier(String email, String motDePasse) {
+
+        // Message volontairement générique pour ne pas révéler si l'email existe
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Email ou mot de passe incorrect."));
+
+        if (!passwordEncoder.matches(motDePasse, utilisateur.getPasswordHash())) {
+            throw new IllegalArgumentException("Email ou mot de passe incorrect.");
+        }
+
+        return utilisateur;
+    }
 }

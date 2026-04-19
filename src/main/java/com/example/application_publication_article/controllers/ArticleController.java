@@ -60,4 +60,16 @@ public class ArticleController {
         articleService.deleteArticle(id);
         return ResponseEntity.noContent().build();
     }
+
+    // 5. POST : Toggle like sur un article
+    //    L'utilisateurId est passé en query param le temps qu'on n'ait pas d'auth Spring Security
+    @PostMapping("/{id}/like")
+    public ResponseEntity<?> toggleLike(@PathVariable Long id, @RequestParam Long utilisateurId) {
+        try {
+            ArticleService.LikeEtat etat = articleService.toggleLike(id, utilisateurId);
+            return ResponseEntity.ok(etat);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }
