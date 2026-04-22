@@ -53,17 +53,17 @@
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <button (click)="toggleLike()"
-                [disabled]="likeEnCours()"
-                [class.border-rose-400]="aLike()"
-                [class.text-rose-600]="aLike()"
+        <button (click)="like.toggle()"
+                [disabled]="like.enCours()"
+                [class.border-rose-400]="like.aLike()"
+                [class.text-rose-600]="like.aLike()"
                 class="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 rounded-full hover:border-rose-400 hover:text-rose-600 transition group disabled:opacity-50">
           <svg class="w-4 h-4 transition"
-               [attr.fill]="aLike() ? 'currentColor' : 'none'"
+               [attr.fill]="like.aLike() ? 'currentColor' : 'none'"
                stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
-          <span class="text-sm font-medium">{{ nbLikes() }}</span>
+          <span class="text-sm font-medium">{{ like.nbLikes() }}</span>
         </button>
       </div>
     </div>
@@ -88,11 +88,26 @@
         <p class="text-sm text-zinc-500 mb-1">Vous avez aimé cet article ?</p>
         <p class="font-serif-display text-xl">Suivez la catégorie {{ article.categorie.nomCategorie }}</p>
       </div>
-      <button class="flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-stone-50 rounded-full hover:bg-zinc-700 transition text-sm font-medium">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
-        Suivre
+      <button (click)="toggleFollow()"
+              [disabled]="followedCategories.enCours()"
+              [class.bg-zinc-900]="!estSuivie()"
+              [class.text-stone-50]="!estSuivie()"
+              [class.bg-emerald-50]="estSuivie()"
+              [class.text-emerald-700]="estSuivie()"
+              [class.border]="estSuivie()"
+              [class.border-emerald-200]="estSuivie()"
+              class="flex items-center gap-2 px-5 py-2.5 rounded-full hover:opacity-90 transition text-sm font-medium disabled:opacity-50">
+        @if (estSuivie()) {
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          Suivie
+        } @else {
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Suivre
+        }
       </button>
     </div>
   </div>

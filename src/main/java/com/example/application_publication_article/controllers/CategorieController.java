@@ -51,7 +51,11 @@ public class CategorieController {
         return ResponseEntity.noContent().build(); // Renvoie 204 No Content
     }
 
-    // 5. POST : Toggle follow sur une catégorie
+    @GetMapping("/avec-compteurs")
+    public ResponseEntity<List<CategorieService.CategorieAvecCompteur>> getAllAvecCompteurs() {
+        return ResponseEntity.ok(categorieService.getAllAvecCompteurs());
+    }
+
     @PostMapping("/{id}/follow")
     public ResponseEntity<?> toggleFollow(@PathVariable Long id, @RequestParam Long utilisateurId) {
         try {

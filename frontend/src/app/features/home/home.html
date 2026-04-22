@@ -21,9 +21,25 @@
 @if (categoriesDistinctes().length > 0) {
   <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-10">
     <div class="flex items-center gap-2 overflow-x-auto pb-2 -mx-1 px-1">
-      <button class="shrink-0 px-4 py-2 text-sm font-medium bg-zinc-900 text-stone-50 rounded-full">Tout</button>
+      <button (click)="selectionner(null)"
+              [class.bg-zinc-900]="categorieSelectionnee() === null"
+              [class.text-stone-50]="categorieSelectionnee() === null"
+              [class.bg-white]="categorieSelectionnee() !== null"
+              [class.border]="categorieSelectionnee() !== null"
+              [class.border-zinc-200]="categorieSelectionnee() !== null"
+              [class.hover:border-zinc-400]="categorieSelectionnee() !== null"
+              class="shrink-0 px-4 py-2 text-sm font-medium rounded-full transition">
+        Tout
+      </button>
       @for (nom of categoriesDistinctes(); track nom) {
-        <button class="shrink-0 px-4 py-2 text-sm font-medium bg-white border border-zinc-200 rounded-full hover:border-zinc-400 transition">
+        <button (click)="selectionner(nom)"
+                [class.bg-zinc-900]="categorieSelectionnee() === nom"
+                [class.text-stone-50]="categorieSelectionnee() === nom"
+                [class.bg-white]="categorieSelectionnee() !== nom"
+                [class.border]="categorieSelectionnee() !== nom"
+                [class.border-zinc-200]="categorieSelectionnee() !== nom"
+                [class.hover:border-zinc-400]="categorieSelectionnee() !== nom"
+                class="shrink-0 px-4 py-2 text-sm font-medium rounded-full transition">
           {{ nom }}
         </button>
       }
@@ -83,14 +99,60 @@
   <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
     <div class="flex items-end justify-between mb-8">
       <div>
-        <h3 class="font-serif-display text-3xl">Derniers articles</h3>
-        <p class="text-sm text-zinc-500 mt-1">Toutes les publications de la rédaction</p>
+        <h3 class="font-serif-display text-3xl">
+          @if (categorieSelectionnee(); as cat) {
+            Articles · {{ cat }}
+          } @else {
+            Derniers articles
+          }
+        </h3>
+        <p class="text-sm text-zinc-500 mt-1">
+          @if (categorieSelectionnee()) {
+            {{ autresArticles().length }} article(s) dans cette catégorie
+          } @else {
+            Toutes les publications de la rédaction
+          }
+        </p>
       </div>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (article of autresArticles(); track article.id) {
-        <app-article-card [article]="article" />
+    <div class="grid lg:grid-cols-[1fr_280px] gap-10">
+      <div class="grid sm:grid-cols-2 gap-6">
+        @for (article of autresArticles(); track article.id) {
+          <app-article-card [article]="article" />
+        }
+      </div>
+
+      @if (auth.estConnecte()) {
+        <aside class="space-y-6">
+          <div class="p-6 bg-white border border-zinc-200/70 rounded-2xl">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-serif-display text-lg">Mes catégories suivies</h4>
+              <span class="text-xs text-zinc-500">{{ followedCategories.liste().length }}</span>
+            </div>
+            @if (followedCategories.liste().length === 0) {
+              <p class="text-sm text-zinc-500">
+                Suivez une catégorie depuis un article pour la retrouver ici.
+              </p>
+            } @else {
+              <ul class="space-y-2">
+                @for (cat of followedCategories.liste(); track cat.id) {
+                  <li class="flex items-center justify-between gap-3 text-sm">
+                    <span class="px-3 py-1 font-medium rounded-full text-xs"
+                          [class]="paletteFor(cat.nomCategorie).chipBg + ' ' + paletteFor(cat.nomCategorie).chipText">
+                      {{ cat.nomCategorie }}
+                    </span>
+                    <button (click)="followedCategories.toggle(cat)"
+                            [disabled]="followedCategories.enCours()"
+                            class="text-xs text-zinc-400 hover:text-rose-600 transition disabled:opacity-50">
+                      Retirer
+                    </button>
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+        </aside>
       }
     </div>
   </section>

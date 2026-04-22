@@ -60,8 +60,6 @@ public class ArticleService {
         articleRepository.deleteById(id);
     }
 
-    // 5. Toggle like : ajoute le like si absent, le retire sinon.
-    //    Retourne l'état actuel : nombre de likes + si l'utilisateur a liké.
     @Transactional
     public LikeEtat toggleLike(Long articleId, Long utilisateurId) {
         Article article = articleRepository.findById(articleId)
@@ -70,15 +68,10 @@ public class ArticleService {
         Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new IllegalArgumentException("Erreur : Cet utilisateur n'existe pas."));
 
-        boolean ajoute;
-        if (article.getLikes().contains(utilisateur)) {
+        boolean ajoute = article.getLikes().add(utilisateur);
+        if (!ajoute) {
             article.getLikes().remove(utilisateur);
-            ajoute = false;
-        } else {
-            article.getLikes().add(utilisateur);
-            ajoute = true;
         }
-        articleRepository.save(article);
         return new LikeEtat(article.getLikes().size(), ajoute);
     }
 

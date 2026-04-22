@@ -61,8 +61,7 @@ public class ArticleController {
         return ResponseEntity.noContent().build();
     }
 
-    // 5. POST : Toggle like sur un article
-    //    L'utilisateurId est passé en query param le temps qu'on n'ait pas d'auth Spring Security
+    // utilisateurId en query param tant que l'auth Spring Security n'est pas branchée
     @PostMapping("/{id}/like")
     public ResponseEntity<?> toggleLike(@PathVariable Long id, @RequestParam Long utilisateurId) {
         try {

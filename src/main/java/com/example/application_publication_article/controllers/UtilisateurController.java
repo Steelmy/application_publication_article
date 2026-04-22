@@ -72,8 +72,6 @@ public class UtilisateurController {
         }
     }
 
-    // GET : Lister les catégories suivies par un utilisateur
-    // URL : http://localhost:8080/api/utilisateurs/1/categories-suivies
     @GetMapping("/{id}/categories-suivies")
     public ResponseEntity<?> getCategoriesSuivies(@PathVariable Long id) {
         try {

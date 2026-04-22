@@ -1,0 +1,82 @@
+<app-header />
+
+<section class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-12">
+  <div class="max-w-3xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 bg-amber-100 border border-amber-200 rounded-full">
+      <span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
+      <span class="text-xs font-medium text-amber-900">Catégories</span>
+    </div>
+    <h1 class="font-serif-display text-5xl md:text-6xl leading-[1] mb-4">
+      Toutes les <em class="italic text-amber-700">thématiques</em>
+    </h1>
+    <p class="text-lg text-zinc-600">
+      Explorez les sujets qui vous intéressent. Suivez une catégorie pour personnaliser votre fil.
+      @if (nbSuivies() > 0) {
+        <span class="text-zinc-900 font-medium">· {{ nbSuivies() }} suivie(s)</span>
+      }
+    </p>
+  </div>
+</section>
+
+@if (etat().chargement) {
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center text-zinc-500">
+    <div class="inline-block w-6 h-6 border-2 border-zinc-300 border-t-zinc-900 rounded-full animate-spin"></div>
+    <p class="mt-4 text-sm">Chargement des catégories…</p>
+  </div>
+} @else if (etat().erreur) {
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center">
+    <p class="text-sm text-rose-700 bg-rose-50 border border-rose-200 inline-block px-4 py-2 rounded-lg">
+      Impossible de charger les catégories.
+    </p>
+  </div>
+} @else {
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (cat of etat().categories; track cat.id) {
+        <article (click)="ouvrir(cat)"
+                 class="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-zinc-200/70 hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300">
+          <div class="relative aspect-[5/2] bg-gradient-to-br" [class]="'bg-gradient-to-br ' + paletteFor(cat.nomCategorie).gradient">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.35),transparent_55%)]"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div>
+                <h3 class="font-serif-display text-2xl mb-1 group-hover:text-amber-800 transition">{{ cat.nomCategorie }}</h3>
+                <p class="text-xs text-zinc-500">{{ cat.nbArticles }} article(s)</p>
+              </div>
+              <span class="px-3 py-1 font-medium rounded-full text-xs shrink-0"
+                    [class]="paletteFor(cat.nomCategorie).chipBg + ' ' + paletteFor(cat.nomCategorie).chipText">
+                {{ cat.nomCategorie }}
+              </span>
+            </div>
+            <button (click)="toggleFollow(cat, $event)"
+                    [disabled]="followedCategories.enCours()"
+                    [class.bg-zinc-900]="!followedCategories.estSuivie(cat.id)"
+                    [class.text-stone-50]="!followedCategories.estSuivie(cat.id)"
+                    [class.bg-emerald-50]="followedCategories.estSuivie(cat.id)"
+                    [class.text-emerald-700]="followedCategories.estSuivie(cat.id)"
+                    [class.border]="followedCategories.estSuivie(cat.id)"
+                    [class.border-emerald-200]="followedCategories.estSuivie(cat.id)"
+                    class="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-full hover:opacity-90 transition text-sm font-medium disabled:opacity-50">
+              @if (followedCategories.estSuivie(cat.id)) {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Suivie
+              } @else {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Suivre
+              }
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+
+    @if (etat().categories.length === 0) {
+      <p class="text-center text-zinc-500 py-12">Aucune catégorie disponible.</p>
+    }
+  </section>
+}
