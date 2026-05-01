@@ -42,15 +42,14 @@ export class ArticleDetail {
         if (!Number.isFinite(idNum)) {
           return of<Etat>({ article: null, similaires: [], chargement: false, erreur: true });
         }
+        const userId = this.auth.currentUser()?.id;
         return combineLatest([
-          this.articleService.getById(idNum),
-          this.articleService.getAll(),
+          this.articleService.getById(idNum, userId),
+          this.articleService.getSimilaires(idNum, 3, userId),
         ]).pipe(
-          map(([article, tous]) => ({
+          map(([article, similaires]) => ({
             article,
-            similaires: tous
-              .filter((a) => a.id !== article.id && a.categorie?.id === article.categorie?.id)
-              .slice(0, 3),
+            similaires,
             chargement: false,
             erreur: false,
           })),

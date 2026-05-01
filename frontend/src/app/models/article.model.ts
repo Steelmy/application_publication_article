@@ -1,5 +1,12 @@
-import { Categorie } from './categorie.model';
-import { Utilisateur } from './utilisateur.model';
+export interface AuteurResume {
+  id: number;
+  nom: string;
+}
+
+export interface CategorieResume {
+  id: number;
+  nomCategorie: string;
+}
 
 export interface Article {
   id: number;
@@ -7,9 +14,10 @@ export interface Article {
   resume: string;
   contenu: string;
   nombreDeVues: number;
-  categorie: Categorie;
-  auteur: Utilisateur;
-  likes?: Utilisateur[];
+  nbLikes: number;
+  aimeParUtilisateurCourant: boolean;
+  categorie: CategorieResume;
+  auteur: AuteurResume;
   createdAt?: string;
   updateAt?: string;
 }
@@ -20,4 +28,14 @@ export interface ArticleCreateDTO {
   contenu: string;
   auteurId: number;
   categorieId: number;
+}
+
+export interface Page<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
+  first: boolean;
+  last: boolean;
 }

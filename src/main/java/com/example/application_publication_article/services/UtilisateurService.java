@@ -8,6 +8,9 @@ import com.example.application_publication_article.repositories.UtilisateurRepos
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -19,34 +22,23 @@ public class UtilisateurService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Utilisateur inscrireUtilisateur(Utilisateur nouvelUtilisateur, TypeRole typeRole) {
-
-        // Règle métier n°1 : Vérifier que l'email n'existe pas déjà
+    public UtilisateurResponseDTO inscrireUtilisateur(Utilisateur nouvelUtilisateur, TypeRole typeRole) {
         if (utilisateurRepository.existsByEmail(nouvelUtilisateur.getEmail())) {
             throw new IllegalArgumentException("Cet email est déjà utilisé !");
         }
 
-        // Règle métier n°2 : Récupérer le bon rôle en base de données (grâce à notre
-        // Optional !)
         Role role = roleRepository.findByNomRole(typeRole)
                 .orElseThrow(() -> new RuntimeException("Erreur : Le rôle spécifié n'existe pas."));
 
-        // Règle métier n°3 : Hacher le mot de passe
-        // (On part du principe que "getPasswordHash" contient temporairement le mot de
-        // passe en clair tapé par l'utilisateur)
         String motDePasseSecurise = passwordEncoder.encode(nouvelUtilisateur.getPasswordHash());
         nouvelUtilisateur.setPasswordHash(motDePasseSecurise);
-
-        // On assigne le rôle à l'utilisateur
         nouvelUtilisateur.setRole(role);
 
-        // Enfin, on sauvegarde dans la base de données
-        return utilisateurRepository.save(nouvelUtilisateur);
+        return mapper(utilisateurRepository.save(nouvelUtilisateur));
     }
 
-    public Utilisateur authentifier(String email, String motDePasse) {
-
-        // Message volontairement générique pour ne pas révéler si l'email existe
+    @Transactional(readOnly = true)
+    public UtilisateurResponseDTO authentifier(String email, String motDePasse) {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Email ou mot de passe incorrect."));
 
@@ -54,6 +46,30 @@ public class UtilisateurService {
             throw new IllegalArgumentException("Email ou mot de passe incorrect.");
         }
 
-        return utilisateur;
+        return mapper(utilisateur);
+    }
+
+    private static UtilisateurResponseDTO mapper(Utilisateur u) {
+        return new UtilisateurResponseDTO(
+                u.getId(),
+                u.getNom(),
+                u.getEmail(),
+                new RoleDTO(u.getRole().getId(), u.getRole().getNomRole().name()),
+                u.getCreatedAt(),
+                u.getUpdateAt()
+        );
+    }
+
+    public record UtilisateurResponseDTO(
+            Long id,
+            String nom,
+            String email,
+            RoleDTO role,
+            LocalDateTime createdAt,
+            LocalDateTime updateAt
+    ) {
+    }
+
+    public record RoleDTO(Long id, String nomRole) {
     }
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter // Magie Lombok : génère tous les "getters" (ex: getNomCategorie())
 @Setter // Magie Lombok : génère tous les "setters"
 @NoArgsConstructor // Magie Lombok : crée un constructeur vide obligatoire pour Hibernate
-public class Categorie {
+public class Categorie extends BaseEntity {
 
     @Id // Dit à Spring : "Ceci est la Clé Primaire"
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Laisse MySQL gérer l'Auto-Incrément (1, 2, 3...)
@@ -20,22 +20,4 @@ public class Categorie {
     @Column(name = "nom_categorie", nullable = false, unique = true)
     private String nomCategorie;
 
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "update_at")
-    private LocalDateTime updateAt;
-
-    // --- L'astuce du Chef (Les Callbacks JPA) ---
-
-    @PrePersist // Exécuté automatiquement juste AVANT la toute première sauvegarde en BDD
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updateAt = LocalDateTime.now();
-    }
-
-    @PreUpdate // Exécuté automatiquement juste AVANT chaque modification
-    protected void onUpdate() {
-        this.updateAt = LocalDateTime.now();
-    }
 }

@@ -47,85 +47,81 @@
   </section>
 }
 
-@if (enChargement()) {
-  <section class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center text-zinc-500">
-    <div class="inline-block w-6 h-6 border-2 border-zinc-300 border-t-zinc-900 rounded-full animate-spin"></div>
-    <p class="mt-4 text-sm">Chargement des articles…</p>
-  </section>
-} @else if (erreur()) {
-  <section class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center">
-    <p class="text-sm text-rose-700 bg-rose-50 border border-rose-200 inline-block px-4 py-2 rounded-lg">
-      Impossible de charger les articles. Le serveur est-il démarré ?
-    </p>
-  </section>
-} @else if ((articles() ?? []).length === 0) {
-  <section class="max-w-7xl mx-auto px-6 lg:px-10 py-24 text-center text-zinc-500">
-    <p>Aucun article publié pour le moment.</p>
-  </section>
-} @else {
-  @if (articleUne(); as une) {
-    <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
-      <article class="group relative grid lg:grid-cols-2 gap-8 items-stretch bg-white rounded-3xl overflow-hidden border border-zinc-200/70 hover:shadow-2xl hover:shadow-zinc-900/10 transition-all duration-500">
-        <a [routerLink]="['/articles', une.id]" class="relative aspect-[4/3] lg:aspect-auto bg-gradient-to-br from-amber-300 via-rose-400 to-fuchsia-500 block">
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4),transparent_50%)]"></div>
-          <span class="absolute top-6 left-6 px-3 py-1 text-xs font-semibold bg-white/90 backdrop-blur rounded-full">À LA UNE</span>
-        </a>
-        <div class="p-8 lg:p-12 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-3 text-sm text-zinc-500 mb-4">
-              <span class="font-medium text-amber-700">{{ une.categorie.nomCategorie }}</span>
-              <span>·</span>
-              <span>{{ une.nombreDeVues.toLocaleString('fr-FR') }} vues</span>
-            </div>
-            <h2 class="font-serif-display text-4xl md:text-5xl leading-tight mb-4 group-hover:text-amber-800 transition">
-              <a [routerLink]="['/articles', une.id]">{{ une.titre }}</a>
-            </h2>
-            <p class="text-zinc-600 text-lg leading-relaxed">{{ une.resume }}</p>
+@if (!categorieSelectionnee() && articleUne(); as une) {
+  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
+    <article class="group relative grid lg:grid-cols-2 gap-8 items-stretch bg-white rounded-3xl overflow-hidden border border-zinc-200/70 hover:shadow-2xl hover:shadow-zinc-900/10 transition-all duration-500">
+      <a [routerLink]="['/articles', une.id]" class="relative aspect-[4/3] lg:aspect-auto bg-gradient-to-br from-amber-300 via-rose-400 to-fuchsia-500 block">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4),transparent_50%)]"></div>
+        <span class="absolute top-6 left-6 px-3 py-1 text-xs font-semibold bg-white/90 backdrop-blur rounded-full">À LA UNE</span>
+      </a>
+      <div class="p-8 lg:p-12 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 text-sm text-zinc-500 mb-4">
+            <span class="font-medium text-amber-700">{{ une.categorie.nomCategorie }}</span>
+            <span>·</span>
+            <span>{{ une.nombreDeVues.toLocaleString('fr-FR') }} vues</span>
           </div>
-          <div class="mt-8 flex items-center justify-between pt-6 border-t border-zinc-100">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900"></div>
-              <div>
-                <p class="text-sm font-medium">{{ une.auteur.nom }}</p>
-                <p class="text-xs text-zinc-500">Rédaction Inkwell</p>
-              </div>
+          <h2 class="font-serif-display text-4xl md:text-5xl leading-tight mb-4 group-hover:text-amber-800 transition">
+            <a [routerLink]="['/articles', une.id]">{{ une.titre }}</a>
+          </h2>
+          <p class="text-zinc-600 text-lg leading-relaxed">{{ une.resume }}</p>
+        </div>
+        <div class="mt-8 flex items-center justify-between pt-6 border-t border-zinc-100">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900"></div>
+            <div>
+              <p class="text-sm font-medium">{{ une.auteur.nom }}</p>
+              <p class="text-xs text-zinc-500">Rédaction Inkwell</p>
             </div>
           </div>
         </div>
-      </article>
-    </section>
-  }
-
-  <section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-    <div class="flex items-end justify-between mb-8">
-      <div>
-        <h3 class="font-serif-display text-3xl">
-          @if (categorieSelectionnee(); as cat) {
-            Articles · {{ cat }}
-          } @else {
-            Derniers articles
-          }
-        </h3>
-        <p class="text-sm text-zinc-500 mt-1">
-          @if (categorieSelectionnee()) {
-            {{ autresArticles().length }} article(s) dans cette catégorie
-          } @else {
-            Toutes les publications de la rédaction
-          }
-        </p>
       </div>
-    </div>
+    </article>
+  </section>
+}
 
-    <div class="grid lg:grid-cols-[1fr_280px] gap-10">
-      <div class="grid sm:grid-cols-2 gap-6">
-        @for (article of autresArticles(); track article.id) {
-          <app-article-card [article]="article" />
+<section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+  <div class="flex items-end justify-between mb-8">
+    <div>
+      <h3 class="font-serif-display text-3xl">
+        @if (categorieSelectionnee(); as cat) {
+          Articles · {{ cat }}
+        } @else {
+          Derniers articles
         }
-      </div>
+      </h3>
+      <p class="text-sm text-zinc-500 mt-1">
+        @if (totalElements() > 0) {
+          Articles {{ debutIndex() }}–{{ finIndex() }} sur {{ totalElements() }}
+        } @else if (categorieSelectionnee()) {
+          Aucun article dans cette catégorie
+        } @else {
+          Toutes les publications de la rédaction
+        }
+      </p>
+    </div>
+  </div>
 
+  @if (enChargement()) {
+    <div class="py-24 text-center text-zinc-500">
+      <div class="inline-block w-6 h-6 border-2 border-zinc-300 border-t-zinc-900 rounded-full animate-spin"></div>
+      <p class="mt-4 text-sm">Chargement des articles…</p>
+    </div>
+  } @else if (erreur()) {
+    <div class="py-24 text-center">
+      <p class="text-sm text-rose-700 bg-rose-50 border border-rose-200 inline-block px-4 py-2 rounded-lg">
+        Impossible de charger les articles. Le serveur est-il démarré ?
+      </p>
+    </div>
+  } @else if (articles().length === 0) {
+    <div class="py-24 text-center text-zinc-500">
+      <p>Aucun article publié pour le moment.</p>
+    </div>
+  } @else {
+    <div class="lg:flex lg:gap-10">
       @if (auth.estConnecte()) {
-        <aside class="space-y-6">
-          <div class="p-6 bg-white border border-zinc-200/70 rounded-2xl">
+        <aside class="lg:w-[260px] lg:shrink-0 mb-8 lg:mb-0">
+          <div class="p-6 bg-white border border-zinc-200/70 rounded-2xl lg:sticky lg:top-24">
             <div class="flex items-center justify-between mb-4">
               <h4 class="font-serif-display text-lg">Mes catégories suivies</h4>
               <span class="text-xs text-zinc-500">{{ followedCategories.liste().length }}</span>
@@ -154,6 +150,51 @@
           </div>
         </aside>
       }
+
+      <div class="lg:flex-1 min-w-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (article of articles(); track article.id) {
+            <app-article-card [article]="article" />
+          }
+        </div>
+
+        @if (totalPages() > 1) {
+          <nav class="mt-10 flex items-center justify-center gap-2" aria-label="Pagination">
+            <button (click)="allerPage(pageNumero() - 1)"
+                    [disabled]="pageNumero() === 0"
+                    class="inline-flex items-center gap-1 px-4 py-2 bg-white border border-zinc-200 rounded-full hover:border-zinc-400 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Précédent
+            </button>
+
+            <div class="flex items-center gap-1 mx-2">
+              @for (n of [].constructor(totalPages()); track $index) {
+                <button (click)="allerPage($index)"
+                        [class.bg-zinc-900]="$index === pageNumero()"
+                        [class.text-stone-50]="$index === pageNumero()"
+                        [class.bg-white]="$index !== pageNumero()"
+                        [class.border]="$index !== pageNumero()"
+                        [class.border-zinc-200]="$index !== pageNumero()"
+                        [class.hover:border-zinc-400]="$index !== pageNumero()"
+                        class="w-9 h-9 rounded-full text-sm font-medium transition">
+                  {{ $index + 1 }}
+                </button>
+              }
+            </div>
+
+            <button (click)="allerPage(pageNumero() + 1)"
+                    [disabled]="pageNumero() >= totalPages() - 1"
+                    class="inline-flex items-center gap-1 px-4 py-2 bg-white border border-zinc-200 rounded-full hover:border-zinc-400 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed">
+              Suivant
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </nav>
+        }
+      </div>
     </div>
-  </section>
-}
+  }
+</section>

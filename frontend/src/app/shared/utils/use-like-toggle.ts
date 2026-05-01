@@ -22,9 +22,8 @@ export function useLikeToggle(article: Signal<Article | null | undefined>): Like
 
   effect(() => {
     const a = article();
-    const userId = auth.currentUser()?.id;
-    nbLikes.set(a?.likes?.length ?? 0);
-    aLike.set(!!userId && !!a?.likes?.some((u) => u.id === userId));
+    nbLikes.set(a?.nbLikes ?? 0);
+    aLike.set(a?.aimeParUtilisateurCourant ?? false);
   });
 
   function toggle(): void {

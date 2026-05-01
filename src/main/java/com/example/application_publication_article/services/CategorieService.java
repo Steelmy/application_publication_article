@@ -23,11 +23,13 @@ public class CategorieService {
     private final ArticleRepository articleRepository;
 
     // 1. Lire toutes les catégories
+    @Transactional(readOnly = true)
     public List<Categorie> getAllCategories() {
         return categorieRepository.findAll();
     }
 
     // 2. Trouver une catégorie par son ID
+    @Transactional(readOnly = true)
     public Optional<Categorie> getCategorieById(Long id) {
         return categorieRepository.findById(id);
     }
