@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Article } from '../../../models/article.model';
 import { paletteFor } from '../../constants/category-palettes';
@@ -11,6 +11,7 @@ import { useLikeToggle } from '../../utils/use-like-toggle';
 })
 export class ArticleCard {
   readonly article = input.required<Article>();
+  readonly unliked = output<number>();
 
   protected readonly palette = computed(() => paletteFor(this.article().categorie?.nomCategorie));
 
@@ -25,7 +26,11 @@ export class ArticleCard {
     return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
   });
 
-  protected readonly like = useLikeToggle(this.article);
+  protected readonly like = useLikeToggle(this.article, {
+    onToggled: (liked) => {
+      if (!liked) this.unliked.emit(this.article().id);
+    },
+  });
 
   protected onLikeClick(event: MouseEvent): void {
     event.preventDefault();
@@ -33,3 +38,4 @@ export class ArticleCard {
     this.like.toggle();
   }
 }
+

@@ -61,7 +61,7 @@
   } @else {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (article of articles(); track article.id) {
-        <app-article-card [article]="article" />
+        <app-article-card [article]="article" (unliked)="retirerArticle($event)" />
       }
     </div>
 

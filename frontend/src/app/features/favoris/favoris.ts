@@ -91,4 +91,9 @@ export class Favoris {
       })
       .then(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
+
+  protected retirerArticle(articleId: number): void {
+    this.articles.update((list) => list.filter((a) => a.id !== articleId));
+    this.totalElements.update((n) => Math.max(0, n - 1));
+  }
 }

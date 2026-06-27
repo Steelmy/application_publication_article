@@ -11,7 +11,14 @@ export interface LikeToggle {
   toggle: () => void;
 }
 
-export function useLikeToggle(article: Signal<Article | null | undefined>): LikeToggle {
+export interface LikeToggleOptions {
+  onToggled?: (liked: boolean) => void;
+}
+
+export function useLikeToggle(
+  article: Signal<Article | null | undefined>,
+  options?: LikeToggleOptions,
+): LikeToggle {
   const articleService = inject(ArticleService);
   const auth = inject(AuthService);
   const router = inject(Router);
@@ -41,6 +48,7 @@ export function useLikeToggle(article: Signal<Article | null | undefined>): Like
         nbLikes.set(etat.nombreLikes);
         aLike.set(etat.likeParUtilisateur);
         enCours.set(false);
+        options?.onToggled?.(etat.likeParUtilisateur);
       },
       error: () => enCours.set(false),
     });
@@ -48,3 +56,4 @@ export function useLikeToggle(article: Signal<Article | null | undefined>): Like
 
   return { nbLikes, aLike, enCours, toggle };
 }
+
