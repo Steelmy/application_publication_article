@@ -11,7 +11,9 @@
     <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
       <a routerLink="/" class="hover:text-zinc-900 transition">Accueil</a>
       <a routerLink="/categories" class="hover:text-zinc-900 transition">Catégories</a>
-      <a href="#" class="hover:text-zinc-900 transition">Favoris</a>
+      @if (auth.estConnecte()) {
+        <a routerLink="/favoris" class="hover:text-zinc-900 transition">Favoris</a>
+      }
     </nav>
 
     <div class="flex items-center gap-3">

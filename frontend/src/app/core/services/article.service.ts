@@ -43,6 +43,14 @@ export class ArticleService {
     const params = new HttpParams().set('utilisateurId', utilisateurId);
     return this.http.post<LikeEtat>(`${this.api}/${articleId}/like`, null, { params });
   }
+
+  getFavoris(page: number, size: number, utilisateurId: number): Observable<Page<Article>> {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('utilisateurId', utilisateurId);
+    return this.http.get<Page<Article>>(`${this.api}/favoris`, { params });
+  }
 }
 
 export interface LikeEtat {

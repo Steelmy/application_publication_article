@@ -63,6 +63,12 @@ public class ArticleService {
         return enrichirListe(similaires, utilisateurIdCourant);
     }
 
+    @Transactional(readOnly = true)
+    public Page<ArticleResponseDTO> getArticlesFavoris(Long utilisateurId, Pageable pageable) {
+        Page<Article> page = articleRepository.findArticlesLikedByUser(utilisateurId, pageable);
+        return enrichirPage(page, utilisateurId);
+    }
+
     public ArticleResponseDTO creerArticle(Article article, Long auteurId, Long categorieId) {
         Utilisateur auteur = utilisateurRepository.findById(auteurId)
                 .orElseThrow(() -> new IllegalArgumentException("Erreur : Cet auteur n'existe pas."));

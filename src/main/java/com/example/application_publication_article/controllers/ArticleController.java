@@ -36,6 +36,13 @@ public class ArticleController {
                 .orElse(ResponseEntity.noContent().build());
     }
 
+    @GetMapping("/favoris")
+    public ResponseEntity<Page<ArticleService.ArticleResponseDTO>> getArticlesFavoris(
+            @PageableDefault(size = 12, sort = {"createdAt", "id"}, direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam Long utilisateurId) {
+        return ResponseEntity.ok(articleService.getArticlesFavoris(utilisateurId, pageable));
+    }
+
     @GetMapping("/{id}/similaires")
     public ResponseEntity<List<ArticleService.ArticleResponseDTO>> getSimilaires(
             @PathVariable Long id,

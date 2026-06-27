@@ -49,4 +49,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("SELECT a.id FROM Article a JOIN a.likes u WHERE u.id = :utilisateurId AND a.id IN :ids")
     Set<Long> findArticleIdsLikedByUserAmong(@Param("utilisateurId") Long utilisateurId,
                                              @Param("ids") List<Long> ids);
+
+    @Query(value = "SELECT a FROM Article a JOIN a.likes u JOIN FETCH a.auteur JOIN FETCH a.categorie WHERE u.id = :utilisateurId",
+            countQuery = "SELECT COUNT(a) FROM Article a JOIN a.likes u WHERE u.id = :utilisateurId")
+    Page<Article> findArticlesLikedByUser(@Param("utilisateurId") Long utilisateurId, Pageable pageable);
 }

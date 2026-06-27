@@ -1,0 +1,105 @@
+<app-header />
+
+<section class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-12">
+  <div class="max-w-3xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 bg-rose-100 border border-rose-200 rounded-full">
+      <svg class="w-3.5 h-3.5 text-rose-500" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+      </svg>
+      <span class="text-xs font-medium text-rose-900">Vos coups de cœur</span>
+    </div>
+    <h1 class="font-serif-display text-5xl md:text-7xl leading-[0.95]">
+      Mes <em class="italic text-rose-600">favoris</em>
+    </h1>
+    <p class="mt-6 text-lg text-zinc-600 max-w-xl">
+      Retrouvez ici tous les articles que vous avez aimés. Votre bibliothèque personnelle de lectures préférées.
+    </p>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+  <div class="flex items-end justify-between mb-8">
+    <div>
+      <h3 class="font-serif-display text-3xl">Articles aimés</h3>
+      <p class="text-sm text-zinc-500 mt-1">
+        @if (totalElements() > 0) {
+          Articles {{ debutIndex() }}–{{ finIndex() }} sur {{ totalElements() }}
+        } @else if (!enChargement() && !erreur()) {
+          Aucun favori pour le moment
+        }
+      </p>
+    </div>
+  </div>
+
+  @if (enChargement()) {
+    <div class="py-24 text-center text-zinc-500">
+      <div class="inline-block w-6 h-6 border-2 border-zinc-300 border-t-zinc-900 rounded-full animate-spin"></div>
+      <p class="mt-4 text-sm">Chargement de vos favoris…</p>
+    </div>
+  } @else if (erreur()) {
+    <div class="py-24 text-center">
+      <p class="text-sm text-rose-700 bg-rose-50 border border-rose-200 inline-block px-4 py-2 rounded-lg">
+        Impossible de charger vos favoris. Le serveur est-il démarré ?
+      </p>
+    </div>
+  } @else if (articles().length === 0) {
+    <div class="py-24 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-rose-50 mb-6">
+        <svg class="w-10 h-10 text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      </div>
+      <p class="text-zinc-600 mb-2">Vous n'avez pas encore de favoris.</p>
+      <p class="text-sm text-zinc-500 mb-6">Parcourez les articles et cliquez sur le cœur pour les retrouver ici.</p>
+      <a routerLink="/" class="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-stone-50 text-sm font-medium rounded-lg hover:bg-zinc-700 transition">
+        Découvrir les articles
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (article of articles(); track article.id) {
+        <app-article-card [article]="article" />
+      }
+    </div>
+
+    @if (totalPages() > 1) {
+      <nav class="mt-10 flex items-center justify-center gap-2" aria-label="Pagination">
+        <button (click)="allerPage(pageNumero() - 1)"
+                [disabled]="pageNumero() === 0"
+                class="inline-flex items-center gap-1 px-4 py-2 bg-white border border-zinc-200 rounded-full hover:border-zinc-400 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Précédent
+        </button>
+
+        <div class="flex items-center gap-1 mx-2">
+          @for (n of [].constructor(totalPages()); track $index) {
+            <button (click)="allerPage($index)"
+                    [class.bg-zinc-900]="$index === pageNumero()"
+                    [class.text-stone-50]="$index === pageNumero()"
+                    [class.bg-white]="$index !== pageNumero()"
+                    [class.border]="$index !== pageNumero()"
+                    [class.border-zinc-200]="$index !== pageNumero()"
+                    [class.hover:border-zinc-400]="$index !== pageNumero()"
+                    class="w-9 h-9 rounded-full text-sm font-medium transition">
+              {{ $index + 1 }}
+            </button>
+          }
+        </div>
+
+        <button (click)="allerPage(pageNumero() + 1)"
+                [disabled]="pageNumero() >= totalPages() - 1"
+                class="inline-flex items-center gap-1 px-4 py-2 bg-white border border-zinc-200 rounded-full hover:border-zinc-400 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed">
+          Suivant
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </nav>
+    }
+  }
+</section>
